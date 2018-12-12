@@ -1,0 +1,24 @@
+@mixin app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  mat-sidenav {
+    background-color: mat-color($primary,800) !important;
+  }
+
+  mat-sidenav-content {
+    background-color: mat-color($primary,900);
+  }
+
+  mat-sidenav-container {
+    height: 100%;
+  }
+
+  .mat-tab-nav-bar {
+    background-color: mat-color($primary,800);
+  }
+
+  .content-container {
+    margin: 10px;
+  }
+}

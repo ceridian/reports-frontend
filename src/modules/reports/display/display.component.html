@@ -1,0 +1,29 @@
+<mat-accordion multi=true>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Options
+    </mat-expansion-panel-header>
+    <p>Test</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Devices
+    </mat-expansion-panel-header>
+    <reports-devices [devices]="devices"></reports-devices>
+    <mat-action-row>
+      <button mat-button (click)="test()">Click me</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Grid
+    </mat-expansion-panel-header>
+    <p>Test</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Chart
+    </mat-expansion-panel-header>
+    <p>Test</p>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,21 @@
+@mixin device-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .device{
+    background-color: mat-color($primary,600);
+  }
+
+  .active{
+    background-color: mat-color($accent,700);
+  }
+
+  .active:focus{
+    background-color: mat-color($accent,700);
+  }
+
+}
+
+table {
+  width: 100%;
+}

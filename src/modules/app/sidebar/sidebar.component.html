@@ -1,0 +1,5 @@
+<img src="/src/assets/KMCCommander-White-s.png" class="logo-kmc" width="250" height="48" alt="">
+<mat-nav-list>
+  <a mat-list-item *ngFor="let p of pages" [ngClass]="{'active': p.active}" href="{{p.link}}"><mat-icon matListIcon>{{p.icon}}</mat-icon> {{ p.label }} </a>
+</mat-nav-list>
+

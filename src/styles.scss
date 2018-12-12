@@ -1,1 +1,136 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import 'modules/app/app.component.scss';
+@import 'modules/app/sidebar/sidebar.component.scss';
+@import 'modules/reports/device/device.component.scss';
+@include mat-core();
+
+
+$primary: (
+  900: #010E18,
+  800: #03253F,
+  700: #002e5f,
+  600: #073f76,
+  500: #00568d,
+  400: #2b457a,
+  300: #39619a,
+  200: #4171ac,
+  100: #4a82be,
+  50: #e1f5fb,
+  contrast: (
+    50: $black-87-opacity,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+
+$secondary: (
+  900: #00449c,
+  800: #0062bb,
+  700: #0065ba,
+  600: #0084df,
+  500: #0092ed,
+  400: #38a2f0,
+  300: #5eb2f1,
+  200: #8cc8f5,
+  100: #64c2ff,
+  50: #e2f1fc,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: $black-87-opacity,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity
+  )
+);
+$custom-primary: mat-palette($primary);
+$custom-secondary: mat-palette($secondary);
+$custom-warn: mat-palette($mat-red);
+
+$my-dark-theme-background: (
+  status-bar: map_get($custom-primary,700),
+  app-bar:    map_get($custom-primary,700),
+  background: map_get($custom-primary,800),
+  hover:      rgba(white, 0.04), 
+  card:       map_get($custom-primary,800),
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: $white-12-opacity,
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
+
+$my-dark-theme-foreground: (
+  base:              map_get($custom-primary,700),
+  divider:           $white-12-opacity,
+  dividers:          $white-12-opacity,
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         rgba(white, 0.3),
+  secondary-text:    rgba(white, 0.7),
+  icon:              white,
+  icons:             white,
+  text:              map_get($custom-primary,default-contrast),
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+@function create-wonky-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $my-dark-theme-foreground,
+    background: $my-dark-theme-background,
+  );
+}
+
+$custom-theme: create-wonky-theme($custom-primary, $custom-secondary, $custom-warn);
+
+@mixin custom-theme($theme) {
+  @include app-theme($theme);
+  @include sidenav-theme($theme);
+  @include device-theme($theme);
+}
+
+@include angular-material-theme($custom-theme);
+@include custom-theme($custom-theme);
+  
+body {
+  background-color: map_get($custom-primary,900);
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html, body { height: 100%; }
+
+.mat-input-element {
+  color: map_get($custom-primary,default-contrast) !important;
+}
+
+.mat-button {
+  background-color: map_get($custom-secondary,700) !important;
+}
