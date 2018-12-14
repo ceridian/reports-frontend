@@ -1,0 +1,12 @@
+<div *ngFor="let a of alerts">
+  <mat-expansion-panel [ngClass]="a.type">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{a.label}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p>{{a.body}}</p>
+
+  </mat-expansion-panel>
+</div>

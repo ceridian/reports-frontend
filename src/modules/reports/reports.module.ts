@@ -9,6 +9,7 @@ import { ReportsRoutes } from './reports.routing';
 import { SharedModule } from '@modules/shared/shared.module';
 import { DevicesComponent } from './devices/devices.component';
 import { DeviceComponent } from './device/device.component';
+import { OptionsComponent } from './options/options.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { DeviceComponent } from './device/device.component';
     ReportsComponent,
     DisplayComponent,
     DevicesComponent,
-    DeviceComponent
+    DeviceComponent,
+    OptionsComponent
   ]
 })
 export class ReportsModule { }
