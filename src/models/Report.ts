@@ -4,7 +4,7 @@ import { Device } from './Device';
 
 export enum RangeTypes { Static, Days, Weeks, Months, Years };
 
-export enum ActionTypes { Raw, Average, MinMax, Total, Delta };
+export enum ActionTypes { Raw, Average, MinMax, Total, Delta, Current };
 
 export enum PrecisTypes { Seconds, Minutes, Hours, Days, Weeks, Months };
 
@@ -21,7 +21,8 @@ const ActionKeys = {
 	1: 'Average',
 	2: 'MinMax',
 	3: 'Total',
-	4: 'Delta'
+	4: 'Delta',
+	5: 'Current'
 };
 
 const PrecisKeys = {
@@ -49,6 +50,7 @@ export class Report {
 	public stop: number;
 	public emails: string[];
 	public devices: Device[];
+	public selected: Device[];
 	public createdAt: Date;
 	public updatedAt: Date;
 	constructor(o?) {
@@ -65,7 +67,8 @@ export class Report {
 		this.start = opt.start;
 		this.stop = opt.stop;
 		this.devices = this.setDevices(opt.devices);
-		//this.emails = this.setEmails(opt.emails);
+		this.selected = opt.selected || [];
+		this.emails = opt.emails || [];
 		this.createdAt = this.setDate(opt.createdAt);
 		this.updatedAt = this.setDate(opt.updatedAt);
 	}
@@ -83,8 +86,9 @@ export class Report {
 			rangeOptions: this.rangeOptions,
 			start: this.start,
 			stop: this.stop,
-			//emails: this.getEmails(),
-			devices: this.devices
+			emails: this.emails,
+			devices: this.devices,
+			selected: this.selected
 		}
 		return obj;
 	}

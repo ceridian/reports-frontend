@@ -1,5 +1,5 @@
 <div *ngFor="let a of alerts">
-  <mat-expansion-panel [ngClass]="a.type">
+  <!--mat-expansion-panel [ngClass]="toClass(a.type)">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{a.label}}
@@ -8,5 +8,14 @@
 
     <p>{{a.body}}</p>
 
-  </mat-expansion-panel>
+  </mat-expansion-panel>-->
+  <mat-card [ngClass]="toClass(a.type)">
+    <mat-card-title>
+      <a (click)="a.show = !a.show">{{a.label}} </a>
+      <mat-icon style="float: right;" (click)="clear(a.id)">clear</mat-icon>
+    </mat-card-title>
+    <mat-card-content *ngIf="a.show">
+      {{a.body}}
+    </mat-card-content>
+  </mat-card>
 </div>

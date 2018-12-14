@@ -1,15 +1,15 @@
-import { DevicesComponent } from '../devices/devices.component';
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ReportsService } from '../reports.service';
+import { AlertService } from '@services/alert.service';
+import { DevicesComponent } from '../devices/devices.component';
 
 import { Device } from '@models/Device';
 import { Report } from '@models/Report';
 
 @Component({
-  selector: 'app-display',
+  selector: 'reports-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.scss']
 })
@@ -20,7 +20,7 @@ export class DisplayComponent implements OnInit {
   report: Report = null;
   devices: Device[] = [];
 
-  constructor(private service: ReportsService, private route: ActivatedRoute) {
+  constructor(private service: ReportsService, private route: ActivatedRoute, private alert: AlertService) {
     this.service.report$.subscribe(r => {
       this.report = r;
       console.log(this.report);
@@ -39,6 +39,27 @@ export class DisplayComponent implements OnInit {
   test(){
     console.log(this.report.devices.length);
     console.log(this.devs.getDevices());
+  }
+
+  onSave(){
+
+  }
+
+  onRun(){
+    this.loadSelectedPoints();
+    if(this.report.selected.length === 0){
+      this.alert.danger('No Points Selected', 'Must select at least one point.');
+    }
+  }
+
+  loadSelectedPoints(): void{
+    let devs = this.devs.getDevices();
+    this.report.selected = [];
+    devs.forEach(dev => {
+      if(dev.points.length > 0){
+        this.report.selected.push(dev);
+      }
+    });
   }
 
 }

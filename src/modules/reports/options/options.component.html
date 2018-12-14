@@ -1,3 +1,11 @@
-<p>
-  options works!
-</p>
+<div *ngIf="report">
+  <mat-form-field>
+    <input matInput [(ngModel)]="report.name" placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Operation" [(value)]="operation">
+      <mat-option *ngFor="let o of operations" [value]="o.value">{{o.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <reports-emails [items]="report.emails"></reports-emails>
+</div>

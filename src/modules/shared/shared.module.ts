@@ -13,11 +13,13 @@ import {
   MatProgressSpinnerModule,
   MatDialogModule,
   MatExpansionModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSelectModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { BusyComponent } from './busy/busy.component';
 import { AlertComponent } from './alert/alert.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { AlertComponent } from './alert/alert.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -56,11 +60,13 @@ import { AlertComponent } from './alert/alert.component';
     BusyComponent,
     MatExpansionModule,
     MatCheckboxModule,
-    AlertComponent
+    AlertComponent,
+    FormsModule,
+    MatSelectModule,
   ],
   declarations: [
     BusyComponent,
-    AlertComponent
+    AlertComponent,
   ]
 })
 export class SharedModule { }

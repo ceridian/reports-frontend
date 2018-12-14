@@ -1,15 +1,17 @@
-export class Alert{
+export class ListItem {
   public id: string;
-  public label: string;
-  public body: string;
-  public type: AlertType;
-  public show: boolean;
-  constructor(obj){
-    this.label = obj.label;
-    this.body = obj.body;
-    this.type = obj.type;
+  public value: any;
+  public label: any;
+  public edit: boolean;
+  constructor(opt) {
+    if (typeof (opt) === 'string') {
+      this.value = opt;
+    } else {
+      this.value = opt.value;
+    }
     this.id = this.genUUID();
-    this.show = false;
+    this.label = this.value;
+    this.edit = false;
   }
 
   private genUUID(){
@@ -21,6 +23,3 @@ export class Alert{
     });
   }
 }
-
-
-export enum AlertType{success,warning,danger};

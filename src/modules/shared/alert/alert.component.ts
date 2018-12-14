@@ -28,4 +28,12 @@ export class AlertComponent implements OnInit {
     }
   }
 
+  clear(id: string){
+    for(let i=0; i<this.alerts.length; i++){
+      if (this.alerts[i].id === id) {
+        this.alerts.splice(i, 1);
+      }
+    }
+  }
+
 }

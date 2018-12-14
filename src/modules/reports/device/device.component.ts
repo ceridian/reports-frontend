@@ -30,6 +30,7 @@ export class DeviceComponent implements OnInit {
   }
 
   public getDevice(): Device{
+    this.device.points = this.selection.selected;
     return this.device;
   }
 
@@ -52,9 +53,7 @@ export class DeviceComponent implements OnInit {
   }
 
   onClick(row){
-    console.log(row);
     this.selection.toggle(row);
-    console.log(this.selection.selected);
   }
 
 }

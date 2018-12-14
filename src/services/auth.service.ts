@@ -41,7 +41,6 @@ export class AuthService {
         ob.complete();
       }else{
         this.token = this.getToken();
-        console.log(route);
         if(this.token){
           this.socket.initSocket(this.token).subscribe(user => {
             if(user){
@@ -63,37 +62,6 @@ export class AuthService {
           ob.complete();
         }
       }
-        //let token = this.getParameterByName('jwt');
-        //if(token)
-        //console.log(route);
-        // canLoad // route.path  // ie.. /reports
-        /*this.token = this.getToken();
-        console.log(this.token);
-        if(this.token){
-          this.login();
-          ob.next(true);
-          ob.complete();
-        }else{
-          ob.next(false);
-          ob.complete();
-          this.notLoggedIn();
-        }
-      }
-      /*let token = this.getToken();
-      if(token){
-        this.cookie.setCookie('tok',token);
-
-        this.socket.initSocket(token).subscribe(user => {
-          this.user = user;
-          this._user.next(this.user);
-          //ob.next(true);
-          //ob.complete();
-        });
-      }else{
-        ob.next(false);
-        ob.complete();
-        this.nav.toError();
-      }*/
     });
   }
 

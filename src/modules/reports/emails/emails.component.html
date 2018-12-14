@@ -1,0 +1,17 @@
+<mat-list>
+    <mat-list-item *ngFor="let item of listItems">
+      <mat-form-field>
+        <input matInput [(ngModel)]="item.label" [disabled]="!item.edit">
+        <mat-icon *ngIf="!item.edit" matSuffix (click)="item.edit = !item.edit">edit</mat-icon>
+        <mat-icon *ngIf="!item.edit" matSuffix (click)="onDelete(item)">delete</mat-icon>
+        <mat-icon *ngIf="item.edit" matSuffix (click)="onSave(item)">check</mat-icon>
+        <mat-icon *ngIf="item.edit" matSuffix (click)="onCancel(item)">clear</mat-icon>
+      </mat-form-field>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-form-field>
+        <input matInput [(ngModel)]="addInput" placeholder="Add Email">
+        <mat-icon matSuffix (click)="onAdd()">add</mat-icon>
+      </mat-form-field>   
+    </mat-list-item>
+  </mat-list>
