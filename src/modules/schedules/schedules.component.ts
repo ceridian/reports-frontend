@@ -12,7 +12,7 @@ import { Message } from '@models/Message';
   styleUrls: ['./schedules.component.scss']
 })
 export class SchedulesComponent implements OnInit {
-  columns: string[] = ['name','user','report','schedType','next','updatedAt','createdAt','actions'];
+  columns: string[] = ['name','report','schedType','next','updatedAt','createdAt','actions'];
   dataSource: MatTableDataSource<Schedule>;
   loaded: boolean = false;
 
@@ -23,13 +23,9 @@ export class SchedulesComponent implements OnInit {
 
   constructor(private service: SchedulesService) {
     this.schedules = [];
-    this.service.onMessage().subscribe((data: Message) => {
-      if(data.addr === 'existing'){
-        this.schedules = data.value.map(s => {
-          return new Schedule(s);
-        });
-        this.initDataSource();
-      }
+    this.service.existing$.subscribe(schedules => {
+      this.schedules = schedules;
+      this.initDataSource();
     });
     this.service.send({addr: 'existing', value: ''});
   }
@@ -65,18 +61,6 @@ export class SchedulesComponent implements OnInit {
 
   private delete(schedule: Schedule): void{
     this.service.send({addr: 'delete', value: schedule.id});
-    this.remove(schedule.id);
-  }
-
-  private remove(id): void{
-    let hold = [];
-    for(let i=0; i<this.schedules.length; i++){
-      if(this.schedules[i].id !== id){
-        hold.push(this.schedules[i]);
-      }
-    }
-    this.schedules = hold;
-    this.initDataSource();
   }
 
   private initDataSource(): void{

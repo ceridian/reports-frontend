@@ -3,9 +3,36 @@
     <input matInput [(ngModel)]="report.name" placeholder="Name">
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Operation" [(value)]="operation">
-      <mat-option *ngFor="let o of operations" [value]="o.value">{{o.label}}</mat-option>
+    <mat-select placeholder="Action" [(value)]="report.action">
+      <mat-option *ngFor="let o of actions" [value]="o.value">{{o.label}}</mat-option>
     </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="report.action !== 0">
+    <mat-select placeholder="Precision" [(value)]="report.actionOptions.precision">
+      <mat-option *ngFor="let o of precisions" [value]="o.value">{{o.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Range" [(value)]="report.range">
+      <mat-option *ngFor="let o of ranges" [value]="o.value">{{o.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <ng-container *ngIf="report.range === 0">
+    <mat-form-field>
+      <input matInput placeholder="Start"
+        [(ngModel)]="report.start"
+        [owlDateTimeTrigger]="start" [owlDateTime]="start">
+      <owl-date-time #start></owl-date-time>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Stop"
+        [(ngModel)]="report.stop"
+        [owlDateTimeTrigger]="stop" [owlDateTime]="stop">
+      <owl-date-time #stop></owl-date-time>
+    </mat-form-field>
+  </ng-container>
+  <mat-form-field *ngIf="report.range !== 0">
+    <input matInput type="number" name="interval" [(ngModel)]="report.rangeOptions.interval" placeholder="Previous">
   </mat-form-field>
   <reports-emails [items]="report.emails"></reports-emails>
 </div>

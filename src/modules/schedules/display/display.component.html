@@ -1,3 +1,33 @@
-<p>
-  display works!
-</p>
+<div [hidden]="loaded">
+  <busy></busy>
+</div>
+<div [hidden]="!loaded">
+  <mat-form-field>
+    <mat-select placeholder="Type" [(value)]="schedule.schedType">
+      <mat-option *ngFor="let o of types" [value]="o.value">{{o.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="name" [(ngModel)]="schedule.name" placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Next"
+      [(ngModel)]="schedule.next"
+      [owlDateTimeTrigger]="next" [owlDateTime]="next">
+    <owl-date-time #next></owl-date-time>
+  </mat-form-field>
+  <mat-form-field *ngIf="schedule.schedType === 1">
+    <input matInput type="number" name="minute" [(ngModel)]="schedule.options.minute" placeholder="Minute">
+  </mat-form-field>
+  <mat-form-field *ngIf="schedule.schedType !== 1 && schedule.schedType !== 0">
+    <input matInput type="time" name="time" [(ngModel)]="schedule.options.timeOfDay" placeholder="Time">
+  </mat-form-field>
+  <mat-form-field *ngIf="schedule.schedType === 3">
+    <mat-select placeholder="Weekday" [(value)]="schedule.options.dayOfWeek">
+      <mat-option *ngFor="let o of days" [value]="o.value">{{o.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="schedule.schedType === 4">
+    <input matInput type="number" name="day" [(ngModel)]="schedule.options.dayOfMonth" placeholder="Day">
+  </mat-form-field>
+</div>

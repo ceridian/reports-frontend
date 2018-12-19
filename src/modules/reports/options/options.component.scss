@@ -1,0 +1,8 @@
+@mixin options-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .mat-active{
+    color: mat-color($accent,600) !important;
+  }
+}

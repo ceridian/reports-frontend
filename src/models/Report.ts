@@ -46,8 +46,8 @@ export class Report {
 	public actionOptions: any;
 	public range: RangeTypes;
 	public rangeOptions: any;
-	public start: number;
-	public stop: number;
+	public start: Date;
+	public stop: Date;
 	public emails: string[];
 	public devices: Device[];
 	public selected: Device[];
@@ -63,9 +63,9 @@ export class Report {
 		this.action = opt.action;
 		this.actionOptions = opt.actionOptions || {};
 		this.range = opt.range;
-		this.rangeOptions = opt.rangeOptions || {interval:1};
-		this.start = opt.start;
-		this.stop = opt.stop;
+		this.rangeOptions = opt.rangeOptions || {interval:1,includeCurInt: false};
+		this.start = this.setDate(opt.start);
+		this.stop = this.setDate(opt.stop);
 		this.devices = this.setDevices(opt.devices);
 		this.selected = opt.selected || [];
 		this.emails = opt.emails || [];
@@ -84,8 +84,8 @@ export class Report {
 			actionOptions: this.actionOptions,
 			range: this.range,
 			rangeOptions: this.rangeOptions,
-			start: this.start,
-			stop: this.stop,
+			start: this.start.valueOf(),
+			stop: this.stop.valueOf(),
 			emails: this.emails,
 			devices: this.devices,
 			selected: this.selected

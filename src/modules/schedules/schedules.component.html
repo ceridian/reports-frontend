@@ -19,11 +19,6 @@
         <td mat-cell *matCellDef="let element"> {{toTypeStr(element.schedType)}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
-        <td mat-cell *matCellDef="let element"> {{element.user.fullName}} </td>
-      </ng-container>
-  
       <ng-container matColumnDef="report">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Report </th>
         <td mat-cell *matCellDef="let element"> {{element.report.name}} </td>

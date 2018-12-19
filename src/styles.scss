@@ -3,6 +3,8 @@
 @import 'modules/app/app.component.scss';
 @import 'modules/app/sidebar/sidebar.component.scss';
 @import 'modules/reports/device/device.component.scss';
+@import 'modules/reports/options/options.component.scss';
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 @include mat-core();
 
 
@@ -110,6 +112,7 @@ $custom-theme: create-wonky-theme($custom-primary, $custom-secondary, $custom-wa
   @include app-theme($theme);
   @include sidenav-theme($theme);
   @include device-theme($theme);
+  @include options-theme($theme);
 }
 
 @include angular-material-theme($custom-theme);

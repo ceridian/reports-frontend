@@ -14,12 +14,16 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatCheckboxModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { BusyComponent } from './busy/busy.component';
 import { AlertComponent } from './alert/alert.component';
 import { FormsModule } from '@angular/forms';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   imports: [
@@ -40,7 +44,12 @@ import { FormsModule } from '@angular/forms';
     MatExpansionModule,
     MatCheckboxModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    MatButtonToggleModule
   ],
   exports: [
     CommonModule,
@@ -63,6 +72,11 @@ import { FormsModule } from '@angular/forms';
     AlertComponent,
     FormsModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    MatButtonToggleModule
   ],
   declarations: [
     BusyComponent,

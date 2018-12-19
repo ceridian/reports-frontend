@@ -41,14 +41,14 @@ export class ReportsService {
     }
   }
 
-  private existing(arr){
+  private existing(arr): void{
     let reports = arr.map(r => {
       return new Report(r);
     });
     this._existing.next(reports);
   }
 
-  private findById(r){
+  private findById(r): void{
     this._report.next(new Report(r));
   }
 
@@ -69,20 +69,25 @@ export class ReportsService {
     this.socket.send({addr: 'reports',value: msg});
   }
 
-  public toDisplay(id: string){
+  public toDisplay(id: string): void{
     this.nav.toReportsDisplay(id);
   }
 
-  public toSchedule(id: string){
+  public toReports(): void{
+    this.nav.toReports();
+  }
+
+  public toSchedule(id: string): void{
+    console.log(id);
     let sub = this.socket.message$.subscribe((data: Message) => {
-      if(data.addr === 'schedule'){
-        if(data.value.addr === 'newSchedule'){
+      if(data.addr === 'schedules'){
+        if(data.value.addr === 'created'){
           this.nav.toSchedule(data.value.value);
           sub.unsubscribe();
         }
       }
     });
-    this.socket.send({addr: 'schedule', value: {addr: 'newSchedule', value: id}})
+    this.socket.send({addr: 'schedules', value: {addr: 'create', value: id}})
   }
 
 }

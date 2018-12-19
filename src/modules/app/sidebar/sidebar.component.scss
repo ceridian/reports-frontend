@@ -5,4 +5,24 @@
   .active{
     background-color: mat-color($accent,600);
   }
+  .mat-list-item:hover{
+    background: mat-color($accent,600) !important;
+    background-color: mat-color($accent,600);
+  }
+  .mat-list-item:focus{
+    background: mat-color($accent,600) !important;
+    background-color: mat-color($accent,600);
+  }
+  .mainIcon{
+    background-image: url(/src/assets/KMCCommander-White-s.png);
+    width: 250px;
+    height: 48px;
+    position: relative;
+    top: 6px;
+    margin-right: 1em;
+    background-position: 0% 50%;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }

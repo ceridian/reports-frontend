@@ -1,12 +1,12 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import { Report, ActionTypes } from '@models/Report';
 
-export interface Option{
-  value: number;
-  label: string;
-}
+
+import { Report, ActionTypes, RangeTypes, PrecisTypes } from '@models/Report';
+import { EmailsComponent } from '../emails/emails.component';
+
+import { Option } from '@models/Option';
 
 @Component({
   selector: 'reports-options',
@@ -15,9 +15,11 @@ export interface Option{
 })
 export class OptionsComponent implements OnInit {
   @Input() report: Report;
+  @ViewChild(EmailsComponent) emails!: EmailsComponent;
 
-  operations: Option[];
-  operation: ActionTypes;
+  actions: Option[];
+  ranges: Option[];
+  precisions: Option[];
 
   constructor() {
     this.initDropdowns();
@@ -27,16 +29,39 @@ export class OptionsComponent implements OnInit {
     
   }
 
+  /*
+  current just has emails
+  raw does not have precision
+  */
+
   initDropdowns(){
-    this.operations = [
+    this.actions = [
       {value: ActionTypes.Average, label: 'Average'},
       {value: ActionTypes.MinMax, label: 'MinMax'},
       {value: ActionTypes.Total, label: 'Total'},
       {value: ActionTypes.Raw, label: 'Raw'},
       {value: ActionTypes.Delta, label: 'Delta'},
       {value: ActionTypes.Current, label: 'Current'},
+    ];
+    this.ranges = [
+      {value: RangeTypes.Static, label: 'Static'},
+      {value: RangeTypes.Days, label: 'Days'},
+      {value: RangeTypes.Weeks, label: 'Weeks'},
+      {value: RangeTypes.Months, label: 'Months'},
+    ];
+    this.precisions = [
+      {value: PrecisTypes.Seconds, label: 'Seconds'},
+      {value: PrecisTypes.Minutes, label: 'Minutes'},
+      {value: PrecisTypes.Hours, label: 'Hours'},
+      {value: PrecisTypes.Days, label: 'Days'},
+      {value: PrecisTypes.Weeks, label: 'Weeks'},
+      {value: PrecisTypes.Months, label: 'Months'},
     ]
-    this.operation = ActionTypes.Raw;
+  }
+
+  public getOptions(): Report{
+    this.report.emails = this.emails.getItems();
+    return this.report;
   }
 
 }

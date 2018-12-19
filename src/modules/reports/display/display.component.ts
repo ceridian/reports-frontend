@@ -4,9 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ReportsService } from '../reports.service';
 import { AlertService } from '@services/alert.service';
 import { DevicesComponent } from '../devices/devices.component';
+import { OptionsComponent } from '../options/options.component';
 
 import { Device } from '@models/Device';
 import { Report } from '@models/Report';
+
 
 @Component({
   selector: 'reports-display',
@@ -16,6 +18,7 @@ import { Report } from '@models/Report';
 export class DisplayComponent implements OnInit {
 
   @ViewChild(DevicesComponent) devs !: DevicesComponent;
+  @ViewChild(OptionsComponent) options !: OptionsComponent;
 
   report: Report = null;
   devices: Device[] = [];
@@ -42,13 +45,16 @@ export class DisplayComponent implements OnInit {
   }
 
   onSave(){
-
+    if(this.checkError()){
+      return;
+    }
+    this.service.send({addr:'save',value: this.report});
+    this.service.toReports();
   }
 
   onRun(){
-    this.loadSelectedPoints();
-    if(this.report.selected.length === 0){
-      this.alert.danger('No Points Selected', 'Must select at least one point.');
+    if(this.checkError()){
+      return;
     }
   }
 
@@ -60,6 +66,26 @@ export class DisplayComponent implements OnInit {
         this.report.selected.push(dev);
       }
     });
+  }
+
+  loadEditedReport(): void{
+    this.report = this.options.getOptions();
+    this.loadSelectedPoints();
+    console.log(this.report);
+  }
+
+  checkError(): boolean{
+    this.loadEditedReport();
+    if(this.report.selected.length === 0){
+      this.alert.danger('No Points Selected', 'Must select at least one point.');
+      return true;
+    }
+    if(this.report.emails.length === 0){
+      this.alert.danger('No Emails', 'Must have at least one email.');
+      return true;
+    }
+
+    return false;
   }
 
 }
