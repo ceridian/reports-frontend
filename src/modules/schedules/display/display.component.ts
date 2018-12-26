@@ -1,9 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SchedulesService } from '../schedules.service';
 
 import { Schedule, SchedType, DaysOfWeek } from '@models/Schedule';
 import { Option } from '@models/Option';
+import { TzComponent } from '@modules/shared/tz/tz.component';
 
 @Component({
   selector: 'app-display',
@@ -11,6 +12,8 @@ import { Option } from '@models/Option';
   styleUrls: ['./display.component.scss']
 })
 export class DisplayComponent implements OnInit {
+  @ViewChild(TzComponent) tz!: TzComponent;
+
   schedule: Schedule;
   types: Option[];
   days: Option[];
@@ -19,6 +22,7 @@ export class DisplayComponent implements OnInit {
   constructor(private service: SchedulesService, private route: ActivatedRoute) {
     this.service.schedule$.subscribe(s => {
       this.schedule = s;
+      this.loaded = true;
     });
     this.init();
   }
@@ -26,13 +30,13 @@ export class DisplayComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(route => {
       let id = route.get('id');
-      this.loaded = true;
       this.service.send({addr: 'findById', value: id});
     });
   }
 
   onSave(){
-    this.service.send({addr:'save',value: this.schedule});
+    this.schedule.options.tz = this.tz.getOffset();
+    this.service.send({addr:'save',value: this.schedule.toJSON()});
     this.service.toSchedules();
 
   }

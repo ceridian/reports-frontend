@@ -24,6 +24,7 @@ import { BusyComponent } from './busy/busy.component';
 import { AlertComponent } from './alert/alert.component';
 import { FormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { TzComponent } from './tz/tz.component';
 
 @NgModule({
   imports: [
@@ -76,11 +77,13 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     MatNativeDateModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    TzComponent
   ],
   declarations: [
     BusyComponent,
     AlertComponent,
+    TzComponent
   ]
 })
 export class SharedModule { }

@@ -26,6 +26,7 @@ export class SchedulesComponent implements OnInit {
     this.service.existing$.subscribe(schedules => {
       this.schedules = schedules;
       this.initDataSource();
+      console.log(this.schedules);
     });
     this.service.send({addr: 'existing', value: ''});
   }

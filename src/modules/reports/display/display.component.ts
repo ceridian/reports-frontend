@@ -22,12 +22,15 @@ export class DisplayComponent implements OnInit {
 
   report: Report = null;
   devices: Device[] = [];
+  selected: Device[] = [];
 
   constructor(private service: ReportsService, private route: ActivatedRoute, private alert: AlertService) {
     this.service.report$.subscribe(r => {
       this.report = r;
       console.log(this.report);
       this.devices = this.report.devices;
+      this.selected = this.report.selected;
+      this.devs.setSelected(this.selected);
     });
   }
 
@@ -37,11 +40,6 @@ export class DisplayComponent implements OnInit {
       console.log(id);
       this.service.send({addr: 'findById', value: id});
     });
-  }
-
-  test(){
-    console.log(this.report.devices.length);
-    console.log(this.devs.getDevices());
   }
 
   onSave(){
@@ -59,7 +57,7 @@ export class DisplayComponent implements OnInit {
   }
 
   loadSelectedPoints(): void{
-    let devs = this.devs.getDevices();
+    let devs = this.devs.getSelected();
     this.report.selected = [];
     devs.forEach(dev => {
       if(dev.points.length > 0){

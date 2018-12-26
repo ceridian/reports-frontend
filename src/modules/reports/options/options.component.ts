@@ -7,6 +7,7 @@ import { Report, ActionTypes, RangeTypes, PrecisTypes } from '@models/Report';
 import { EmailsComponent } from '../emails/emails.component';
 
 import { Option } from '@models/Option';
+import { TzComponent } from '@modules/shared/tz/tz.component';
 
 @Component({
   selector: 'reports-options',
@@ -16,6 +17,7 @@ import { Option } from '@models/Option';
 export class OptionsComponent implements OnInit {
   @Input() report: Report;
   @ViewChild(EmailsComponent) emails!: EmailsComponent;
+  @ViewChild(TzComponent) tz!: TzComponent;
 
   actions: Option[];
   ranges: Option[];
@@ -61,6 +63,7 @@ export class OptionsComponent implements OnInit {
 
   public getOptions(): Report{
     this.report.emails = this.emails.getItems();
+    this.report.rangeOptions.tz = this.tz.getOffset();
     return this.report;
   }
 

@@ -2,11 +2,6 @@
   <mat-expansion-panel-header>
     {{device.dis}}
   </mat-expansion-panel-header>
-  <!--<mat-selection-list ng-attr-id="device.id">
-    <mat-list-option *ngFor="let p of device.points" [selected]="p.selected" (click)="p.selected = !p.selected" [ngClass]="{'active': p.selected}">
-      {{p.dis}}({{p.bacnetCur}}): {{p.curVal}}{{p.unit}}
-    </mat-list-option>
-  </mat-selection-list>-->
   <mat-form-field [color]="'accent'">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
@@ -22,7 +17,7 @@
         <td mat-cell *matCellDef="let row">
           <mat-checkbox (click)="$event.stopPropagation()"
                         (change)="$event ? selection.toggle(row) : null"
-                        [checked]="selection.isSelected(row)">
+                        [checked]="row.selected">
           </mat-checkbox>
         </td>
       </ng-container>

@@ -1,7 +1,11 @@
-<div [hidden]="loaded">
+<div *ngIf="!loaded">
   <busy></busy>
 </div>
-<div [hidden]="!loaded">
+<div *ngIf="loaded">
+  <div>
+    <button mat-button (click)="onSave()">Save</button>
+    <button mat-button (click)="onCancel()">Cancel</button>
+  </div>
   <mat-form-field>
     <mat-select placeholder="Type" [(value)]="schedule.schedType">
       <mat-option *ngFor="let o of types" [value]="o.value">{{o.label}}</mat-option>
@@ -30,4 +34,5 @@
   <mat-form-field *ngIf="schedule.schedType === 4">
     <input matInput type="number" name="day" [(ngModel)]="schedule.options.dayOfMonth" placeholder="Day">
   </mat-form-field>
+  <shared-tz></shared-tz>
 </div>

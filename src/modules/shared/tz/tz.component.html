@@ -1,0 +1,5 @@
+<mat-form-field>
+  <mat-select placeholder="Timezone" [(value)]="offset">
+    <mat-option *ngFor="let o of zones" [value]="o.to">{{o.value}}({{o.from}})</mat-option>
+  </mat-select>
+</mat-form-field>

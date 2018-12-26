@@ -65,7 +65,7 @@ export class Schedule {
       user: this.user.id,
       report: this.report.id,
       schedType: this.schedType,
-      next: this.next,
+      next: this.next.valueOf(),
       options: this.options
     }
   }

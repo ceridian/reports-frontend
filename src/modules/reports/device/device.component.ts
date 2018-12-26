@@ -29,9 +29,24 @@ export class DeviceComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  public getDevice(): Device{
+  public getSelected(): Device{
     this.device.points = this.selection.selected;
     return this.device;
+  }
+
+  public setSelected(points: Point[]): void{
+    this.device.points.forEach(point => {
+      points.forEach(p => {
+        if(p.id === point.id){
+          point.selected = true;
+          this.selection.toggle(point);
+        }
+      });
+    });
+  }
+
+  public getId(): string{
+    return this.device.id;
   }
 
   applyFilter(filterValue: string): void{

@@ -28,7 +28,6 @@ export class SchedulesService {
 
   private listeners(): void{
     this.socket.message$.subscribe((data: Message) => {
-      console.log(data);
       if(data.addr === 'schedules'){
         this.router(data.value);
       }
@@ -43,6 +42,7 @@ export class SchedulesService {
   }
 
   private existing(arr): void{
+    console.log(arr);
     let schedules = arr.map(r => {
       return new Schedule(r);
     });

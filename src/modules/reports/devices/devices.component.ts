@@ -1,5 +1,4 @@
 
-
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 
 import { Device } from '@models/Device';
@@ -13,6 +12,7 @@ import { DeviceComponent } from '../device/device.component';
 })
 export class DevicesComponent implements OnInit {
   @Input() devices: Device[] = [];
+  @Input() selected: Device[] = [];
 
   @ViewChildren(DeviceComponent) devs !: QueryList<DeviceComponent>;
 
@@ -21,17 +21,35 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
-  public getDevices(): Device[]{
+  public getSelected(): Device[]{
     return this.devs.map(dev => {
-      return dev.getDevice();
+      return dev.getSelected();
     });
   }
 
-  public getSelected(){
-    
+  public setSelected(selected?: Device[]){
+    if(selected){
+      this.selected = selected;
+    }
+    if(this.devs.length === 0){
+      setTimeout(() => {
+        this.setSelected();
+      }, 1000);
+    }else{
+      this.devs.forEach(dev => {
+        let id = dev.getId();
+        let points = [];
+        this.selected.forEach(sdev => {
+          if(id === sdev.id){
+            points = sdev.points;
+          }
+        });
+        dev.setSelected(points);
+      });
+    }
   }
 
 }

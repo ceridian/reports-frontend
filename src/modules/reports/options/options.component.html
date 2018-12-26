@@ -34,5 +34,6 @@
   <mat-form-field *ngIf="report.range !== 0">
     <input matInput type="number" name="interval" [(ngModel)]="report.rangeOptions.interval" placeholder="Previous">
   </mat-form-field>
+  <shared-tz></shared-tz>
   <reports-emails [items]="report.emails"></reports-emails>
 </div>
