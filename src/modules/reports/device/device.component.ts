@@ -39,7 +39,7 @@ export class DeviceComponent implements OnInit {
       points.forEach(p => {
         if(p.id === point.id){
           point.selected = true;
-          this.selection.toggle(point);
+          this.selection.select(point);
         }
       });
     });
@@ -50,21 +50,20 @@ export class DeviceComponent implements OnInit {
   }
 
   applyFilter(filterValue: string): void{
-    console.log(filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+    const numRows = this.dataSource.filteredData.length;
+    return numSelected >= numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
     this.selection.clear() :
-    this.dataSource.data.forEach(row => this.selection.select(row));
+    this.dataSource.filteredData.forEach(row => this.selection.select(row));
   }
 
   onClick(row){
